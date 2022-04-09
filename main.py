@@ -112,6 +112,7 @@ if __name__ == "__main__":
         plt.figure()
         plt.plot(xaxis, train_loss, label='train')
         plt.plot(xaxis, val_loss, label='val')
+        plt.legend()
         plt.savefig('Train_Val_Loss.png', dpi=300)
         plt.close()
 
@@ -141,6 +142,8 @@ if __name__ == "__main__":
     save_model(net, path='model.pkl')
     init_args = {'hidden_size': best_hidden_size, 'beta': best_beta}
     net = read_model('model.pkl')
+
+
 
 
 
