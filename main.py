@@ -5,6 +5,7 @@ from model import fc2
 import sys
 import matplotlib.pyplot as plt
 import pickle
+import seaborn as sns
 
 plt.style.use('ggplot')
 
@@ -126,7 +127,6 @@ if __name__ == "__main__":
         with open(path, 'wb') as f:
             pickle.dump(model_file, f)
 
-
     def read_model(path):
         with open(path, 'rb') as file:
             net = pickle.load(file)
@@ -138,10 +138,20 @@ if __name__ == "__main__":
     # 用最佳参数训练并画图，获取最终模型
     net = train_plot(best_lr, best_hidden_size, best_beta)
 
+    # 可视化网络参数w
+    sns.heatmap(net.w1)
+    plt.savefig('w1.png', dpi=300)
+    plt.close()
+
+    sns.heatmap(net.w2)
+    plt.savefig('w2.png', dpi=300)
+    plt.close()
+
     # 模型保存和读取
     save_model(net, path='model.pkl')
     init_args = {'hidden_size': best_hidden_size, 'beta': best_beta}
     net = read_model('model.pkl')
+
 
 
 
